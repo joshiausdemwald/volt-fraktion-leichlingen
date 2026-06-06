@@ -13,4 +13,7 @@ export default defineConfig({
   // base: '/<repo-name>/',
 
   integrations: [sitemap()],
+  markdown: {
+    
+  }
 });

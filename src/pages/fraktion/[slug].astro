@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+
 
 export async function getStaticPaths() {
   const memberEntries = await getCollection('members');
@@ -38,7 +40,7 @@ const initials = entry.data.name
       <aside class="member-profile-card">
         <div class="member-image-wrapper">
           {entry.data.image ? (
-            <img src={entry.data.image} alt={entry.data.name} class="detail-image" />
+            <Image src={entry.data.image} alt={entry.data.name} class="detail-image" />
           ) : (
             <div class="detail-avatar-placeholder">
               <span>{initials}</span>

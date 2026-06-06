@@ -40,7 +40,7 @@
 
   /* Accent: Volt red */
   --accent: var(--volt-red);
-  --accent-hover: #c4330e;
+  --accent-hover: var(--volt-red);
   --accent-light: #fdeae4;
 
   /* Additional Volt accent palette */
@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.25;
-  color: var(--text-primary);
+  color: var(--volt-purple);
   letter-spacing: -0.02em;
 }
 
