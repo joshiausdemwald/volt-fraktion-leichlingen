@@ -1,4 +1,7 @@
 ---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   badge?: string;
   title: string;
@@ -7,6 +10,8 @@ interface Props {
   primaryCtaHref?: string;
   secondaryCtaText?: string;
   secondaryCtaHref?: string;
+  backgroundImage?: string | ImageMetadata;
+  backgroundPosition?: string;
 }
 
 const {
@@ -17,10 +22,22 @@ const {
   primaryCtaHref,
   secondaryCtaText,
   secondaryCtaHref,
+  backgroundImage,
+  backgroundPosition = 'center',
 } = Astro.props;
+
+const optimizedBackgroundImage = typeof backgroundImage === 'string' || !backgroundImage
+  ? undefined
+  : await getImage({ src: backgroundImage, format: 'webp', width: 1920 });
+const backgroundImageUrl = typeof backgroundImage === 'string'
+  ? backgroundImage
+  : optimizedBackgroundImage?.src;
+const heroStyle = backgroundImageUrl
+  ? `--hero-background-image: url("${backgroundImageUrl.replace(/"/g, '\\"')}"); --hero-background-position: ${backgroundPosition};`
+  : undefined;
 ---
 
-<section class="hero-section" aria-label={title}>
+<section class:list={['hero-section', { 'has-background-image': backgroundImageUrl }]} style={heroStyle} aria-label={title}>
   <div class="container hero-container animate-fade-in">
     <div class="hero-content">
       {badge && <span class="hero-badge badge badge-accent">{badge}</span>}
@@ -73,6 +90,16 @@ const {
     overflow: hidden;
     background: radial-gradient(circle at 80% 20%, hsl(var(--primary-hue), 70%, 95%) 0%, transparent 50%),
                 radial-gradient(circle at 10% 80%, hsl(205, 80%, 96%) 0%, transparent 50%);
+  }
+
+  .hero-section.has-background-image {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.84) 44%, rgba(255, 255, 255, 0.18) 100%),
+                      var(--hero-background-image);
+    background-size: cover;
+    background-position: var(--hero-background-position);
   }
 
   .hero-container {
