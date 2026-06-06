@@ -5,8 +5,9 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   // FÜR CUSTOM DOMAIN:
-  site: 'https://volt-fraktion-leichlingen.de',
-  base: '/',
+  // site: 'https://volt-fraktion-leichlingen.de',
+  site: 'https://joshiausdemwald.github.io',
+  base: '/volt-fraktion-leichlingen',
 
   // FÜR STANDARD GITHUB PAGES SUBPATH (z.B. https://username.github.io/repo/):
   // site: 'https://<username>.github.io',
