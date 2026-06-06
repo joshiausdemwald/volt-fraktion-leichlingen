@@ -91,9 +91,9 @@ Die Website wird automatisch mittels GitHub Actions gebaut und auf GitHub Pages 
 
 #### 1. Domain-Konfiguration (`astro.config.mjs`)
 Öffnen Sie die Datei `astro.config.mjs` und passen Sie die Werte an:
-*   **Mit eigener Domain (z.B. `volt-neustadt.de`):**
+*   **Mit eigener Domain (z.B. `volt-leichlingen.de`):**
     ```javascript
-    site: 'https://volt-neustadt.de',
+    site: 'https://volt-leichlingen.de',
     base: '/',
     ```
 *   **Ohne eigene Domain (Standard GitHub-Unterpfad):**
