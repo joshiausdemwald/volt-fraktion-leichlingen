@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MemberCard from '../../components/MemberCard.astro';
+import { getCollection } from 'astro:content';
+
+const allMembers = await getCollection('members');
+const sortedMembers = allMembers.sort((a, b) => a.data.weight - b.data.weight);
+---
+
+<Layout 
+  title="Unsere Fraktion | Volt Fraktion Leichlingen"
+  description="Lernen Sie die Gesichter hinter unserer politischen Arbeit kennen. Unsere Stadträtinnen, Stadträte und Geschäftsführer im Portrait."
+>
+  <div class="container section">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <span><a href="/">Startseite</a></span>
+      <strong>Fraktion</strong>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <span class="badge badge-primary">Unser Team</span>
+      <h1>Unsere Fraktion im Stadtrat</h1>
+      <p class="lead">
+        Wir engagieren uns ehrenamtlich im Stadtrat Leichlingen, um unsere Stadt fit für die Zukunft zu machen. Lernen Sie unsere Fraktionsmitglieder und ihre Themenschwerpunkte kennen.
+      </p>
+    </header>
+
+    <div class="members-grid">
+      {sortedMembers.map((member) => (
+        <MemberCard 
+          name={member.data.name} 
+          role={member.data.role} 
+          email={member.data.email} 
+          phone={member.data.phone} 
+          image={member.data.image}
+          committees={member.data.committees} 
+          slug={member.slug} 
+        />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 4rem;
+    max-width: 800px;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
+
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    .members-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

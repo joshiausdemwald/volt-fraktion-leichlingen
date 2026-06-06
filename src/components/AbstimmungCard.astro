@@ -1,0 +1,196 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  result: 'angenommen' | 'abgelehnt' | 'in_abstimung';
+  yesVotes: number;
+  noVotes: number;
+  abstentions?: number;
+  factionVote: 'dafür' | 'dagegen' | 'enthalten';
+}
+
+const { title, date, result, yesVotes, noVotes, abstentions = 0, factionVote } = Astro.props;
+
+const total = yesVotes + noVotes + abstentions;
+const yesPercent = total > 0 ? Math.round((yesVotes / total) * 100) : 0;
+const noPercent = total > 0 ? Math.round((noVotes / total) * 100) : 0;
+const abstainPercent = total > 0 ? Math.round((abstentions / total) * 100) : 0;
+
+const formattedDate = new Date(date).toLocaleDateString('de-DE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<div class="vote-card">
+  <div class="vote-header">
+    <span class:list={["vote-badge", `badge-${result}`]}>
+      {result === 'angenommen' ? 'Angenommen' : result === 'abgelehnt' ? 'Abgelehnt' : 'In Abstimmung'}
+    </span>
+    <time class="vote-date" datetime={date.toISOString()}>{formattedDate}</time>
+  </div>
+
+  <h3 class="vote-title">{title}</h3>
+
+  <!-- Visualization Bar -->
+  <div class="vote-bar-container">
+    <div class="vote-bar">
+      <div class="bar-yes" style={`width: ${yesPercent}%`} title={`Ja: ${yesVotes} (${yesPercent}%)`}></div>
+      <div class="bar-no" style={`width: ${noPercent}%`} title={`Nein: ${noVotes} (${noPercent}%)`}></div>
+      {abstentions > 0 && (
+        <div class="bar-abstain" style={`width: ${abstainPercent}%`} title={`Enthaltung: ${abstentions} (${abstainPercent}%)`}></div>
+      )}
+    </div>
+    
+    <div class="vote-labels">
+      <span class="label-yes">Ja: {yesPercent}% ({yesVotes})</span>
+      <span class="label-no">Nein: {noPercent}% ({noVotes})</span>
+      {abstentions > 0 && <span class="label-abstain">Ent.: {abstainPercent}%</span>}
+    </div>
+  </div>
+
+  <!-- Faction Vote status -->
+  <div class="faction-vote-box">
+    <span class="faction-label">Abstimmung der Volt Fraktion:</span>
+    <span class:list={["faction-decision", `decision-${factionVote}`]}>
+      {factionVote === 'dafür' ? 'Dafür' : factionVote === 'dagegen' ? 'Dagegen' : 'Enthalten'}
+    </span>
+  </div>
+</div>
+
+<style>
+  .vote-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .vote-badge {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-angenommen {
+    background-color: hsl(var(--status-success), 80%, 93%);
+    color: hsl(var(--status-success), 50%, 25%);
+  }
+
+  .badge-abgelehnt {
+    background-color: hsl(var(--status-danger), 80%, 93%);
+    color: hsl(var(--status-danger), 50%, 25%);
+  }
+
+  .badge-in_abstimung {
+    background-color: hsl(var(--status-warning), 80%, 90%);
+    color: hsl(var(--status-warning), 50%, 25%);
+  }
+
+  .vote-date {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+
+  .vote-title {
+    font-size: 1.15rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.35;
+    color: var(--text-primary);
+  }
+
+  /* Visualization bar */
+  .vote-bar-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .vote-bar {
+    height: 12px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+
+  .bar-yes {
+    background-color: hsl(var(--status-success), 60%, 45%);
+    height: 100%;
+  }
+
+  .bar-no {
+    background-color: hsl(var(--status-danger), 60%, 45%);
+    height: 100%;
+  }
+
+  .bar-abstain {
+    background-color: var(--text-tertiary);
+    height: 100%;
+    opacity: 0.5;
+  }
+
+  .vote-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    font-weight: 700;
+  }
+
+  .label-yes { color: hsl(var(--status-success), 50%, 35%); }
+  .label-no { color: hsl(var(--status-danger), 50%, 35%); }
+
+  /* Faction vote box */
+  .faction-vote-box {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+
+  .faction-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .faction-decision {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  .decision-dafür {
+    background-color: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .decision-dagegen {
+    background-color: hsl(var(--status-danger), 80%, 93%);
+    color: hsl(var(--status-danger), 50%, 35%);
+  }
+
+  .decision-enthalten {
+    background-color: var(--bg-secondary);
+    color: var(--text-tertiary);
+  }
+</style>

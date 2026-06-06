@@ -1,0 +1,266 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import MotionCard from '../../components/MotionCard.astro';
+
+export async function getStaticPaths() {
+  const topicEntries = await getCollection('topics');
+  return topicEntries.map(entry => ({
+    params: { slug: entry.slug }, 
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Inline SVG map for headers
+const icons: Record<string, string> = {
+  bike: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><polyline points="15 6 18.5 12 14 12"></polyline><line x1="12" y1="15" x2="12" y2="9"></line><line x1="5.5" y1="17.5" x2="12" y2="15"></line><line x1="18.5" y1="17.5" x2="12" y2="15"></line><line x1="12" y1="9" x2="16" y2="9"></line><polyline points="5.5 17.5 10 9 12 9"></polyline></svg>`,
+  laptop: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line><line x1="12" y1="17" x2="12" y2="20"></line></svg>`,
+  leaf: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.8a7 7 0 0 1-13.9.2"></path><path d="M9 22v-4"></path><path d="M14 17a3 3 0 0 0-3-3"></path></svg>`,
+  users: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+  default: `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`,
+};
+
+const iconSvg = icons[entry.data.icon || 'default'] || icons.default;
+
+// Dynamic motion filtering using keywords based on topic slug
+const allMotions = await getCollection('motions');
+const topicKeywords: Record<string, string[]> = {
+  mobilitaet: ['fahrrad', 'verkehr', 'bahn', 'radwege', 'bus', 'stellplätze', 'mobilität'],
+  digitalisierung: ['digital', 'app', 'mängelmelder', 'it', 'wlan', 'breitband', 'digitalisierung'],
+  klimaschutz: ['baum', 'solar', 'photovoltaik', 'co2', 'klima', 'umwelt', 'klimaschutz', 'bäume'],
+  buergerbeteiligung: ['buerger', 'bürger', 'haushalt', 'mitbestimmung', 'transparenz', 'stream', 'beteiligung']
+};
+
+const keywords = topicKeywords[entry.slug] || [];
+const relatedMotions = allMotions.filter((motion) => {
+  const contentToSearch = `${motion.data.title} ${motion.data.summary} ${motion.body}`.toLowerCase();
+  return keywords.some(keyword => contentToSearch.includes(keyword));
+});
+---
+
+<Layout 
+  title={`${entry.data.title} | Volt Fraktion Leichlingen`}
+  description={entry.data.summary}
+>
+  <div class="container section">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <span><a href="/">Startseite</a></span>
+      <span><a href="/themen">Themen</a></span>
+      <strong>{entry.data.title}</strong>
+    </nav>
+
+    <div class="topic-detail-layout">
+      <!-- Main Content -->
+      <article class="topic-main">
+        <header class="topic-header">
+          <div class="topic-icon-large" fragment-html set:html={iconSvg} />
+          <div>
+            <span class="badge badge-primary">Schwerpunkt</span>
+            <h1>{entry.data.title}</h1>
+          </div>
+        </header>
+
+        <div class="topic-body prose">
+          <Content />
+        </div>
+      </article>
+
+      <!-- Sidebar with related motions -->
+      <aside class="topic-sidebar">
+        <div class="sidebar-card">
+          <h2 class="sidebar-title">Verwandte Anträge</h2>
+          {relatedMotions.length > 0 ? (
+            <div class="sidebar-motions">
+              {relatedMotions.map((motion) => (
+                <div class="sidebar-motion-item">
+                  <span class="sidebar-motion-id">{motion.data.motionId}</span>
+                  <h3 class="sidebar-motion-title">
+                    <a href={`/antraege/${motion.slug}`}>{motion.data.title}</a>
+                  </h3>
+                  <p class="sidebar-motion-summary">{motion.data.summary}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p class="no-motions-text">
+              Aktuell gibt es keine spezifischen Anträge zu diesem Thema. Wir arbeiten an neuen Initiativen!
+            </p>
+          )}
+          <div class="sidebar-action">
+            <a href="/antraege" class="btn btn-outline btn-sm font-sm">Alle Anträge durchsuchen</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .topic-detail-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 992px) {
+    .topic-detail-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .topic-icon-large {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    background-color: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .topic-header h1 {
+    font-size: 2.5rem;
+    margin-top: 0.25rem;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 640px) {
+    .topic-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .topic-header h1 {
+      font-size: 2rem;
+    }
+  }
+
+  /* Prose typography styles */
+  .prose {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.25rem;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.35rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .prose :global(ul) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Sidebar Card */
+  .sidebar-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 6.5rem;
+  }
+
+  .sidebar-title {
+    font-size: 1.35rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+    padding-bottom: 0.5rem;
+  }
+
+  .sidebar-motions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .sidebar-motion-item {
+    padding-bottom: 1rem;
+  }
+
+  .sidebar-motion-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-motion-id {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--primary);
+    background-color: var(--primary-light);
+    padding: 0.1rem 0.4rem;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    margin-bottom: 0.4rem;
+  }
+
+  .sidebar-motion-title {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+  }
+
+  .sidebar-motion-title a {
+    color: var(--text-primary);
+  }
+
+  .sidebar-motion-title a:hover {
+    color: var(--primary);
+  }
+
+  .sidebar-motion-summary {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .no-motions-text {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-action {
+    margin-top: 1.5rem;
+  }
+
+  .font-sm {
+    font-size: 0.85rem;
+  }
+
+  .btn-sm {
+    padding: 0.5rem 1rem;
+  }
+</style>

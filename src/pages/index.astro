@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import TopicCard from '../components/TopicCard.astro';
+import NewsCard from '../components/NewsCard.astro';
+import MotionCard from '../components/MotionCard.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch all collections and sort them appropriately
+const allNews = await getCollection('news');
+const latestNews = allNews
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const allTopics = await getCollection('topics');
+const sortedTopics = allTopics.sort((a, b) => a.data.weight - b.data.weight);
+
+const allMotions = await getCollection('motions');
+const latestMotions = allMotions
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<Layout title="Volt Fraktion Stadtrat Leichlingen | Startseite">
+  <!-- Hero Component -->
+  <Hero 
+    badge="Kommunalpolitik neu denken"
+    title="Zukunft wird vor Ort gemacht."
+    lead="Wir bringen frischen Wind, pragmatische Ideen und europäische Best Practices in den Stadtrat von Leichlingen. Transparent, digital und bürgernah."
+    primaryCtaText="Fraktion kennenlernen"
+    primaryCtaHref="/fraktion"
+    secondaryCtaText="Unsere Anträge"
+    secondaryCtaHref="/antraege"
+  />
+
+  <!-- Topics Section using Section Component -->
+  <Section class="section-punch" ariaLabelledBy="topics-heading">
+    <div class="section-header">
+      <span class="badge badge-punch">Wofür wir stehen</span>
+      <h2 id="topics-heading">Unsere Schwerpunkte</h2>
+      <p class="section-desc">Wir fokussieren uns auf die Themen, die Leichlingen heute und morgen lebenswert machen.</p>
+    </div>
+    
+    <div class="topics-grid">
+      {sortedTopics.map((topic) => (
+        <TopicCard 
+          title={topic.data.title} 
+          icon={topic.data.icon} 
+          summary={topic.data.summary} 
+          slug={topic.slug} 
+        />
+      ))}
+    </div>
+    
+    <div class="section-footer-cta">
+      <a href="/themen" class="btn btn-secondary">Alle Programmpunkte ansehen</a>
+    </div>
+  </Section>
+
+  <!-- News Section using Section Component -->
+  <Section ariaLabelledBy="news-heading">
+    <div class="section-header-flex">
+      <div>
+        <span class="badge badge-primary">Aktuelles</span>
+        <h2 id="news-heading">Neuigkeiten & Presse</h2>
+      </div>
+      <a href="/aktuelles" class="btn btn-outline hide-mobile">Alle Artikel</a>
+    </div>
+    
+    <div class="cards-grid">
+      {latestNews.map((post) => (
+        <NewsCard 
+          title={post.data.title} 
+          date={post.data.date} 
+          summary={post.data.summary} 
+          slug={post.slug} 
+          image={post.data.image}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+    
+    <div class="show-mobile-only text-center mt-2">
+      <a href="/aktuelles" class="btn btn-outline">Alle Artikel</a>
+    </div>
+  </Section>
+
+  <!-- Motions Section using Section Component -->
+  <Section bg ariaLabelledBy="motions-heading">
+    <div class="section-header-flex">
+      <div>
+        <span class="badge badge-accent">Ratsarbeit</span>
+        <h2 id="motions-heading">Unsere Anträge im Stadtrat</h2>
+      </div>
+      <a href="/antraege" class="btn btn-outline hide-mobile">Alle Anträge</a>
+    </div>
+    
+    <div class="motions-list">
+      {latestMotions.map((motion) => (
+        <MotionCard 
+          title={motion.data.title} 
+          date={motion.data.date} 
+          status={motion.data.status} 
+          motionId={motion.data.motionId} 
+          summary={motion.data.summary} 
+          slug={motion.slug} 
+          documentUrl={motion.data.documentUrl}
+        />
+      ))}
+    </div>
+    
+    <div class="show-mobile-only text-center mt-2">
+      <a href="/antraege" class="btn btn-outline">Alle Anträge</a>
+    </div>
+  </Section>
+
+  <!-- Contact Banner Section using Section Component -->
+  <Section class="contact-banner-section" ariaLabelledBy="contact-banner-heading">
+    <div class="contact-banner-card">
+      <h2 id="contact-banner-heading">Mitmachen & Mitgestalten</h2>
+      <p>
+        Haben Sie Fragen zu unserer Arbeit, Anregungen oder ein konkretes Anliegen in Ihrer Nachbarschaft? Wir freuen uns auf das Gespräch mit Ihnen.
+      </p>
+      <div class="contact-banner-cta">
+        <a href="/kontakt" class="btn btn-primary">Kontakt aufnehmen</a>
+        <a href="mailto:fraktion@volt-neustadt.de" class="btn btn-secondary">Direkte Mail schreiben</a>
+      </div>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-header h2 {
+    margin-top: 0.75rem;
+    font-size: 2.25rem;
+  }
+
+  .section-desc {
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  .section-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .section-header-flex h2 {
+    margin-top: 0.5rem;
+    font-size: 2.25rem;
+  }
+
+  .hide-mobile {
+    display: inline-flex;
+  }
+
+  @media (max-width: 768px) {
+    .hide-mobile {
+      display: none;
+    }
+  }
+
+  .show-mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .show-mobile-only {
+      display: block;
+    }
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .mt-2 {
+    margin-top: 2rem;
+  }
+
+  /* Grids */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .section-footer-cta {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  /* Motions List styling */
+  .motions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Contact Banner — solid purple block, comic offset shadow */
+  .contact-banner-card {
+    background: var(--volt-purple);
+    color: #ffffff;
+    padding: 4rem;
+    text-align: center;
+    box-shadow: 12px 12px 0 var(--volt-yellow);
+  }
+
+  @media (max-width: 640px) {
+    .contact-banner-card {
+      padding: 2.5rem 1.5rem;
+    }
+  }
+
+  .contact-banner-card h2 {
+    color: #ffffff;
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-banner-card p {
+    color: #e6dbf2;
+    font-size: 1.15rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-banner-cta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-banner-card .btn-primary {
+    background-color: var(--volt-yellow);
+    color: var(--volt-purple);
+  }
+
+  .contact-banner-card .btn-primary:hover {
+    background-color: #ffffff;
+    color: var(--volt-purple);
+  }
+
+  .contact-banner-card .btn-secondary {
+    background-color: #ffffff;
+    color: var(--volt-purple);
+  }
+
+  .contact-banner-card .btn-secondary:hover {
+    background-color: var(--volt-yellow);
+    color: var(--volt-purple);
+  }
+</style>

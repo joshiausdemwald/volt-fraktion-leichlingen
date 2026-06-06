@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TopicCard from '../../components/TopicCard.astro';
+import { getCollection } from 'astro:content';
+
+const allTopics = await getCollection('topics');
+const sortedTopics = allTopics.sort((a, b) => a.data.weight - b.data.weight);
+---
+
+<Layout 
+  title="Unsere politischen Themen | Volt Fraktion Leichlingen"
+  description="Wofür wir uns einsetzen: Mobilität, Klimaschutz, Digitalisierung und echte Bürgerbeteiligung für Leichlingen."
+>
+  <div class="container section">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <span><a href="/">Startseite</a></span>
+      <strong>Themen</strong>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <span class="badge badge-primary">Politisches Programm</span>
+      <h1>Unsere Themen & Schwerpunkte</h1>
+      <p class="lead">
+        Wir setzen uns für zukunftsorientierte, europäisch erprobte und lösungsorientierte Politik in Leichlingen ein. Hier finden Sie unsere vier Hauptarbeitsfelder.
+      </p>
+    </header>
+
+    <div class="topics-grid">
+      {sortedTopics.map((topic) => (
+        <TopicCard 
+          title={topic.data.title} 
+          icon={topic.data.icon} 
+          summary={topic.data.summary} 
+          slug={topic.slug} 
+        />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 4rem;
+    max-width: 800px;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+  }
+</style>

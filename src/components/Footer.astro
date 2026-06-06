@@ -1,0 +1,205 @@
+---
+const navItems = [
+	{ href: '/', label: 'Start' },
+	{ href: '/aktuelles', label: 'Aktuelles' },
+	{ href: '/themen', label: 'Themen' },
+	{ href: '/antraege', label: 'Anträge' },
+	{ href: '/fraktion', label: 'Fraktion' },
+	{ href: '/kontakt', label: 'Kontakt' },
+];
+---
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-info">
+      <div class="footer-logo">
+        <span class="logo-volt">Volt</span> Fraktion Leichlingen
+      </div>
+      <p class="footer-desc">
+        Zukunftsorientierte, pragmatische und europäische Politik für unsere Stadt. Lass uns gemeinsam Leichlingen gestalten.
+      </p>
+      <div class="footer-socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <h2 class="footer-title">Navigation</h2>
+      <ul>
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h2 class="footer-title">Kontakt</h2>
+      <p>
+        Volt Fraktion Leichlingen<br />
+        Rathausplatz 1, Zimmer 102<br />
+        99999 Leichlingen
+      </p>
+      <p>
+        E-Mail: <a href="mailto:fraktion@volt-neustadt.de">fraktion@volt-neustadt.de</a><br />
+        Telefon: +49 123 4567890
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-flex">
+      <p>&copy; {new Date().getFullYear()} Volt Fraktion Leichlingen. Alle Rechte vorbehalten.</p>
+      <div class="footer-legal">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+	.footer {
+		background-color: var(--volt-purple);
+		color: #ffffff;
+		padding-top: 4rem;
+		margin-top: auto;
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		gap: 3rem;
+		padding-bottom: 3rem;
+	}
+
+	@media (max-width: 768px) {
+		.footer-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+	}
+
+	.footer-logo {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.5rem;
+		margin-bottom: 1.25rem;
+		color: #ffffff;
+	}
+
+	.footer-desc {
+		color: #d9c9e8;
+		max-width: 320px;
+		margin-bottom: 1.5rem;
+	}
+
+	.footer-socials {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.footer-socials a {
+		color: var(--volt-purple);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		background-color: var(--volt-yellow);
+		transition: all var(--transition-fast);
+	}
+
+	.footer-socials a:hover {
+		color: var(--volt-purple);
+		background-color: #ffffff;
+		transform: translate(2px, 2px);
+	}
+
+	.footer-title {
+		font-size: 1.15rem;
+		margin-bottom: 1.25rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: #ffffff;
+	}
+
+	.footer-links ul {
+		list-style: none;
+	}
+
+	.footer-links li {
+		margin-bottom: 0.75rem;
+	}
+
+	.footer-links a {
+		color: #d9c9e8;
+	}
+
+	.footer-links a:hover {
+		color: var(--volt-yellow);
+	}
+
+	.footer-contact p {
+		margin-bottom: 1rem;
+		color: #d9c9e8;
+	}
+
+	.footer-contact a {
+		color: #d9c9e8;
+		font-weight: 700;
+	}
+
+	.footer-contact a:hover {
+		color: var(--volt-yellow);
+	}
+
+	.footer-bottom {
+		background-color: #3a1860;
+		padding: 1.5rem 0;
+		font-size: 0.875rem;
+		color: #c3aed6;
+	}
+
+	.footer-bottom-flex {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	@media (max-width: 640px) {
+		.footer-bottom-flex {
+			flex-direction: column;
+			text-align: center;
+		}
+	}
+
+	.footer-legal {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.footer-legal a {
+		color: #c3aed6;
+	}
+
+	.footer-legal a:hover {
+		color: var(--volt-yellow);
+	}
+
+  .logo-volt {
+		background-color: var(--volt-yellow);
+		color: var(--volt-purple);
+		padding: 0.15rem 0.5rem;
+		letter-spacing: 0.05em;
+	}
+</style>

@@ -1,0 +1,154 @@
+---
+import MotionStatus from './MotionStatus.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  status: 'eingereicht' | 'beschlossen' | 'abgelehnt' | 'in_beratung';
+  motionId: string;
+  summary: string;
+  slug: string;
+  documentUrl?: string;
+}
+
+const { title, date, status, motionId, summary, slug, documentUrl } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString('de-DE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<div class="motion-card">
+  <div class="motion-header">
+    <span class="motion-id">{motionId}</span>
+    <time class="motion-date" datetime={date.toISOString()}>{formattedDate}</time>
+  </div>
+  
+  <h3 class="motion-title">
+    <a href={`/antraege/${slug}`}>{title}</a>
+  </h3>
+  
+  <p class="motion-summary">{summary}</p>
+  
+  <div class="motion-footer">
+    <MotionStatus status={status} />
+    
+    <div class="motion-actions">
+      {documentUrl && documentUrl !== '#' && (
+        <a href={documentUrl} target="_blank" rel="noopener noreferrer" class="motion-doc-link" aria-label={`PDF-Dokument zu Antrag ${motionId} in neuem Fenster öffnen`}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Dokument
+        </a>
+      )}
+      <a href={`/antraege/${slug}`} class="btn-text-link">
+        Details ansehen &rarr;
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .motion-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .motion-card:hover {
+    transform: translate(4px, 4px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .motion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  .motion-id {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--primary);
+    background-color: var(--primary-light);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .motion-date {
+    font-weight: 500;
+  }
+
+  .motion-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .motion-title a {
+    color: var(--text-primary);
+  }
+
+  .motion-title a:hover {
+    color: var(--primary);
+  }
+
+  .motion-summary {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .motion-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    margin-top: auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .motion-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .motion-doc-link {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 500;
+  }
+
+  .motion-doc-link:hover {
+    color: var(--primary);
+  }
+
+  .btn-text-link {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--primary);
+  }
+
+  .btn-text-link:hover {
+    color: var(--primary-hover);
+  }
+</style>

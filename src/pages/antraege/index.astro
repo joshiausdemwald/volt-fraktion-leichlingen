@@ -1,0 +1,201 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MotionCard from '../../components/MotionCard.astro';
+import { getCollection } from 'astro:content';
+
+const allMotions = await getCollection('motions');
+const sortedMotions = allMotions.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Define status count for filters
+const counts = {
+  all: sortedMotions.length,
+  beschlossen: sortedMotions.filter(m => m.data.status === 'beschlossen').length,
+  in_beratung: sortedMotions.filter(m => m.data.status === 'in_beratung').length,
+  abgelehnt: sortedMotions.filter(m => m.data.status === 'abgelehnt').length,
+  eingereicht: sortedMotions.filter(m => m.data.status === 'eingereicht').length,
+};
+---
+
+<Layout 
+  title="Anträge & Stadtratsarbeit | Volt Fraktion Leichlingen"
+  description="Unsere parlamentarischen Initiativen im Stadtrat Leichlingen. Sehen Sie alle Anträge, Anfragen und deren aktuellen Bearbeitungsstatus."
+>
+  <div class="container section">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <span><a href="/">Startseite</a></span>
+      <strong>Anträge</strong>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <span class="badge badge-primary">Ratsarbeit</span>
+      <h1>Anträge & Initiativen</h1>
+      <p class="lead">
+        Wir bringen konstruktive Anträge in den Stadtrat ein, um Leichlingen lebenswerter zu machen. Hier können Sie den Status all unserer Anträge transparent nachverfolgen.
+      </p>
+    </header>
+
+    {sortedMotions.length > 0 ? (
+      <div class="motions-container">
+        <!-- Filter Tabs -->
+        <div class="filter-wrapper">
+          <label id="filter-label" class="sr-only">Anträge nach Status filtern</label>
+          <div class="filter-tabs" role="tablist" aria-labelledby="filter-label">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true" aria-controls="motions-list">
+              Alle <span class="filter-count">({counts.all})</span>
+            </button>
+            <button class="filter-btn" data-filter="beschlossen" role="tab" aria-selected="false" aria-controls="motions-list">
+              Beschlossen <span class="filter-count">({counts.beschlossen})</span>
+            </button>
+            <button class="filter-btn" data-filter="in_beratung" role="tab" aria-selected="false" aria-controls="motions-list">
+              In Beratung <span class="filter-count">({counts.in_beratung})</span>
+            </button>
+            <button class="filter-btn" data-filter="eingereicht" role="tab" aria-selected="false" aria-controls="motions-list">
+              Eingereicht <span class="filter-count">({counts.eingereicht})</span>
+            </button>
+            <button class="filter-btn" data-filter="abgelehnt" role="tab" aria-selected="false" aria-controls="motions-list">
+              Abgelehnt <span class="filter-count">({counts.abgelehnt})</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Motions List -->
+        <div id="motions-list" class="motions-grid-list">
+          {sortedMotions.map((motion) => (
+            <div class="motion-item-wrapper" data-status={motion.data.status}>
+              <MotionCard 
+                title={motion.data.title} 
+                date={motion.data.date} 
+                status={motion.data.status} 
+                motionId={motion.data.motionId} 
+                summary={motion.data.summary} 
+                slug={motion.slug} 
+                documentUrl={motion.data.documentUrl}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p>Derzeit sind keine Anträge verzeichnet. Wir bereiten aktuell neue Initiativen vor!</p>
+      </div>
+    )}
+  </div>
+</Layout>
+
+<script>
+  // Client-side filtering script
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const motionItems = document.querySelectorAll<HTMLDivElement>('.motion-item-wrapper');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      // Update active button state
+      filterButtons.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const filterValue = btn.dataset.filter;
+
+      // Filter motion cards
+      motionItems.forEach((item) => {
+        if (filterValue === 'all' || item.dataset.status === filterValue) {
+          item.style.display = 'block';
+          item.classList.add('animate-fade-in');
+        } else {
+          item.style.display = 'none';
+          item.classList.remove('animate-fade-in');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-header {
+    margin-bottom: 3rem;
+    max-width: 800px;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
+
+  /* Filters */
+  .filter-wrapper {
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 0.75rem;
+    min-width: max-content;
+  }
+
+  .filter-btn {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-full);
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .filter-btn:hover {
+    color: var(--primary);
+    background-color: var(--primary-light);
+  }
+
+  .filter-btn.active {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .filter-count {
+    font-size: 0.8rem;
+    opacity: 0.85;
+  }
+
+  .filter-btn.active .filter-count {
+    opacity: 1;
+  }
+
+  /* Motions Grid/List */
+  .motions-grid-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .motion-item-wrapper {
+    transition: all var(--transition-normal);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+  }
+</style>

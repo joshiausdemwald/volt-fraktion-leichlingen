@@ -1,0 +1,98 @@
+---
+interface Props {
+  title: string;
+  icon?: string;
+  summary: string;
+  slug: string;
+}
+
+const { title, icon = 'default', summary, slug } = Astro.props;
+
+// Inline SVG map for fast, zero-dependency, and offline-ready icons
+const icons: Record<string, string> = {
+  bike: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><polyline points="15 6 18.5 12 14 12"></polyline><line x1="12" y1="15" x2="12" y2="9"></line><line x1="5.5" y1="17.5" x2="12" y2="15"></line><line x1="18.5" y1="17.5" x2="12" y2="15"></line><line x1="12" y1="9" x2="16" y2="9"></line><polyline points="5.5 17.5 10 9 12 9"></polyline></svg>`,
+  laptop: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line><line x1="12" y1="17" x2="12" y2="20"></line></svg>`,
+  leaf: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.8a7 7 0 0 1-13.9.2"></path><path d="M9 22v-4"></path><path d="M14 17a3 3 0 0 0-3-3"></path></svg>`,
+  users: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+  default: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`,
+};
+
+const iconSvg = icons[icon] || icons.default;
+---
+
+<div class="topic-card animate-fade-in">
+  <div class="topic-icon" fragment-html set:html={iconSvg} />
+  <h3 class="topic-title">{title}</h3>
+  <p class="topic-summary">{summary}</p>
+  <a href={`/themen/${slug}`} class="topic-link" aria-label={`Mehr über das Thema: ${title} erfahren`}>
+    Mehr erfahren <span aria-hidden="true">&rarr;</span>
+  </a>
+</div>
+
+<style>
+  .topic-card {
+    --topic-accent: var(--volt-purple);
+    background-color: var(--bg-card);
+    padding: 2rem;
+    box-shadow: 8px 8px 0 var(--topic-accent);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Rotierende Volt-Akzentfarben über die Karten im Grid */
+  .topic-card:nth-child(4n + 1) { --topic-accent: var(--volt-red); }
+  .topic-card:nth-child(4n + 2) { --topic-accent: var(--volt-blue); }
+  .topic-card:nth-child(4n + 3) { --topic-accent: var(--volt-yellow); }
+  .topic-card:nth-child(4n + 4) { --topic-accent: var(--volt-green); }
+
+  .topic-card:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0 var(--topic-accent);
+  }
+
+  .topic-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--topic-accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: transform var(--transition-fast);
+  }
+
+  .topic-card:hover .topic-icon {
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  .topic-title {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .topic-summary {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .topic-link {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: auto;
+  }
+
+  .topic-link:hover {
+    color: var(--primary-hover);
+  }
+</style>

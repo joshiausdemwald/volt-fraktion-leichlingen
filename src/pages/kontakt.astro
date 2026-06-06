@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactCard from '../components/ContactCard.astro';
+---
+
+<Layout 
+  title="Kontakt | Volt Fraktion Leichlingen"
+  description="Treten Sie mit uns in Kontakt. Schreiben Sie uns eine Nachricht, rufen Sie uns an oder besuchen Sie uns im Fraktionsbüro."
+>
+  <div class="container section">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <span><a href="/">Startseite</a></span>
+      <strong>Kontakt</strong>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <span class="badge badge-primary">Dialog</span>
+      <h1>Kontakt aufnehmen</h1>
+      <p class="lead">
+        Haben Sie ein Anliegen, möchten Sie Feedback zu unseren Anträgen geben oder sich aktiv in die Kommunalpolitik einbringen? Schreiben Sie uns – wir antworten garantiert.
+      </p>
+    </header>
+
+    <div class="contact-layout">
+      <!-- Contact Form -->
+      <section class="contact-form-section" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="sr-only">Kontaktformular</h2>
+        
+        <form class="contact-form" action="mailto:fraktion@volt-neustadt.de" method="post" enctype="text/plain">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Ihr vollständiger Name" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-Mail-Adresse</label>
+              <input type="email" id="email" name="email" required placeholder="ihre.mail@beispiel.de" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Betreff</label>
+            <input type="text" id="subject" name="subject" required placeholder="Worum geht es?" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Nachricht</label>
+            <textarea id="message" name="message" rows="6" required placeholder="Beschreiben Sie Ihr Anliegen so detailliert wie möglich..."></textarea>
+          </div>
+
+          <div class="form-agreement">
+            <input type="checkbox" id="privacy" name="privacy" required />
+            <label for="privacy">
+              Ich stimme zu, dass meine Angaben zur Kontaktaufnahme verarbeitet werden. Weitere Details finden Sie in der <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            Nachricht senden
+          </button>
+        </form>
+      </section>
+
+      <!-- Sidebar Contact info using ContactCard component -->
+      <aside class="contact-sidebar">
+        <ContactCard showHours={true} />
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 3.5rem;
+    max-width: 800px;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 992px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  /* Form Styling */
+  .contact-form {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 640px) {
+    .contact-form {
+      padding: 1.5rem;
+    }
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    background-color: var(--bg-card);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+
+  .form-agreement {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .form-agreement input {
+    margin-top: 0.25rem;
+    cursor: pointer;
+  }
+
+  .form-agreement a {
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1.05rem;
+  }
+
+  /* Sidebar styling */
+  .contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+</style>

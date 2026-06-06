@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+:root {
+  --font-heading: 'Ubuntu', sans-serif;
+  --font-body: 'Ubuntu', sans-serif;
+
+  /* Force a permanent light appearance regardless of OS preference */
+  color-scheme: light;
+
+  /* Volt purple base with official Volt accent palette (volteuropa.org/visual_identity) */
+  --primary-hue: 265;       /* Volt purple */
+
+  /* Official Volt brand colors */
+  --volt-purple: #502379;
+  --volt-red: #E63E12;
+  --volt-blue: #82D0F4;
+  --volt-yellow: #FDC220;
+  --volt-green: #1BBE6F;
+
+  /* Semantic status hues (used for vote yes/no states in AbstimmungCard) */
+  --status-success: 142;    /* aligned to Volt green */
+  --status-warning: 38;     /* aligned to Volt yellow */
+  --status-danger: 12;      /* aligned to Volt red */
+  --status-info: 200;       /* aligned to Volt blue */
+
+  /* Light Theme variables – crisp white backgrounds */
+  --bg-primary: hsl(0, 0%, 100%);
+  --bg-secondary: hsl(var(--primary-hue), 30%, 97%);
+  --bg-card: hsl(0, 0%, 100%);
+  --bg-card-hover: hsl(var(--primary-hue), 35%, 98%);
+
+  --text-primary: hsl(var(--primary-hue), 50%, 10%);
+  --text-secondary: hsl(var(--primary-hue), 25%, 30%);
+  --text-tertiary: hsl(var(--primary-hue), 16%, 46%);
+
+  --primary: hsl(var(--primary-hue), 75%, 46%);
+  --primary-hover: hsl(var(--primary-hue), 78%, 38%);
+  --primary-light: hsl(var(--primary-hue), 65%, 94%);
+  --primary-light-hover: hsl(var(--primary-hue), 60%, 88%);
+
+  /* Accent: Volt red */
+  --accent: var(--volt-red);
+  --accent-hover: #c4330e;
+  --accent-light: #fdeae4;
+
+  /* Additional Volt accent palette */
+  --accent-blue: var(--volt-blue);
+  --accent-blue-light: #eaf7fe;
+  --accent-yellow: var(--volt-yellow);
+  --accent-yellow-light: #fff6dd;
+  --accent-green: var(--volt-green);
+  --accent-green-light: #e3f8ee;
+
+  --border: hsl(var(--primary-hue), 25%, 82%);
+  --border-hover: hsl(var(--primary-hue), 45%, 62%);
+  --border-focus: hsl(var(--primary-hue), 75%, 46%);
+
+  /* Comic / 2-color hard offset shadows — solid color, no blur, no transparency */
+  --shadow-sm: 4px 4px 0 var(--volt-purple);
+  --shadow-md: 8px 8px 0 var(--volt-purple);
+  --shadow-lg: 12px 12px 0 var(--volt-purple);
+  /* Contrast shadow for elements sitting ON a purple surface */
+  --shadow-on-purple: 8px 8px 0 var(--volt-yellow);
+
+  /* Sharp corners everywhere — only buttons/badges are rounded (pill) */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-full: 999px;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --max-width: 1200px;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: 2.75rem; margin-bottom: 1.5rem; }
+h2 { font-size: 2.25rem; margin-bottom: 1.25rem; }
+h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+p { margin-bottom: 1.25rem; color: var(--text-secondary); }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.section-bg {
+  background-color: var(--bg-secondary);
+}
+
+/* Full-bleed Volt-purple "punch" section with white text */
+.section-punch {
+  background: linear-gradient(135deg, var(--volt-purple) 0%, #3a1860 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-punch h1,
+.section-punch h2,
+.section-punch h3 {
+  color: #ffffff;
+}
+
+.section-punch p {
+  color: #e6dbf2;
+}
+
+/* Buttons inside the purple punch section flip to white-on-purple */
+.section-punch .btn-secondary {
+  background-color: #ffffff;
+  color: var(--volt-purple);
+}
+
+.section-punch .btn-secondary:hover {
+  background-color: var(--volt-yellow);
+  color: var(--volt-purple);
+}
+
+/* Yellow badge for contrast on purple */
+.badge-punch {
+  background-color: var(--volt-yellow);
+  color: var(--volt-purple);
+}
+
+/* Accessibility / Barrierefreiheit */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus outline for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--border-focus);
+  outline-offset: 3px;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -80px;
+  left: 20px;
+  background: var(--accent);
+  color: white;
+  padding: 10px 20px;
+  z-index: 100;
+  border-radius: var(--radius-sm);
+  transition: top var(--transition-fast);
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 20px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  padding: 0.8rem 1.75rem;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(80, 35, 121, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-light-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+/* Badges / Labels */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-primary {
+  background-color: var(--volt-blue);
+  color: var(--accent-light);
+}
+
+.badge-accent {
+  background-color: var(--accent-light);
+  color: var(--accent);
+}
+
+.badge-success {
+  background-color: var(--accent-green-light);
+  color: #0f7a45;
+}
+
+.badge-warning {
+  background-color: var(--accent-yellow-light);
+  color: #8a6400;
+}
+
+.badge-danger {
+  background-color: var(--accent-light);
+  color: var(--accent-hover);
+}
+
+.badge-info {
+  background-color: var(--accent-blue-light);
+  color: #1c6a93;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+/* Breadcrumbs style */
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.breadcrumbs a {
+  color: var(--text-secondary);
+}
+
+.breadcrumbs a:hover {
+  color: var(--primary);
+}
+
+.breadcrumbs span::after {
+  content: "→";
+  margin-left: 0.5rem;
+  color: var(--text-tertiary);
+}
+
+.breadcrumbs span:last-child::after {
+  content: "";
+}
+
+.breadcrumbs strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}

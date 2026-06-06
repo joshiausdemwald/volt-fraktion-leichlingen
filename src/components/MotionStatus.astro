@@ -1,0 +1,32 @@
+---
+interface Props {
+  status: 'eingereicht' | 'beschlossen' | 'abgelehnt' | 'in_beratung';
+}
+
+const { status } = Astro.props;
+
+const statusConfig = {
+  eingereicht: {
+    label: 'Eingereicht',
+    class: 'badge-info'
+  },
+  beschlossen: {
+    label: 'Beschlossen',
+    class: 'badge-success'
+  },
+  abgelehnt: {
+    label: 'Abgelehnt',
+    class: 'badge-danger'
+  },
+  in_beratung: {
+    label: 'In Beratung',
+    class: 'badge-warning'
+  }
+};
+
+const current = statusConfig[status] || { label: status, class: 'badge-primary' };
+---
+
+<span class={`badge ${current.class}`}>
+  {current.label}
+</span>
