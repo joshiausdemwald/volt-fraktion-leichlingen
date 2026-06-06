@@ -12,31 +12,33 @@
 
   /* Official Volt brand colors */
   --volt-purple: #502379;
+  --volt-purple-dark: #3a1860;
+  --volt-purple-light: #f3edf7;
+  --volt-purple-lighter: #faf7fc;
   --volt-red: #E63E12;
   --volt-blue: #82D0F4;
   --volt-yellow: #FDC220;
-  --volt-green: #1BBE6F;
 
   /* Semantic status hues (used for vote yes/no states in AbstimmungCard) */
-  --status-success: 142;    /* aligned to Volt green */
+  --status-success: 200;    /* aligned to Volt blue */
   --status-warning: 38;     /* aligned to Volt yellow */
   --status-danger: 12;      /* aligned to Volt red */
   --status-info: 200;       /* aligned to Volt blue */
 
   /* Light Theme variables – crisp white backgrounds */
   --bg-primary: hsl(0, 0%, 100%);
-  --bg-secondary: hsl(var(--primary-hue), 30%, 97%);
+  --bg-secondary: var(--volt-purple-lighter);
   --bg-card: hsl(0, 0%, 100%);
-  --bg-card-hover: hsl(var(--primary-hue), 35%, 98%);
+  --bg-card-hover: var(--volt-purple-lighter);
 
   --text-primary: hsl(var(--primary-hue), 50%, 10%);
   --text-secondary: hsl(var(--primary-hue), 25%, 30%);
   --text-tertiary: hsl(var(--primary-hue), 16%, 46%);
 
-  --primary: hsl(var(--primary-hue), 75%, 46%);
-  --primary-hover: hsl(var(--primary-hue), 78%, 38%);
-  --primary-light: hsl(var(--primary-hue), 65%, 94%);
-  --primary-light-hover: hsl(var(--primary-hue), 60%, 88%);
+  --primary: var(--volt-purple);
+  --primary-hover: var(--volt-purple-dark);
+  --primary-light: var(--volt-purple-light);
+  --primary-light-hover: #e8dcef;
 
   /* Accent: Volt red */
   --accent: var(--volt-red);
@@ -48,12 +50,9 @@
   --accent-blue-light: #eaf7fe;
   --accent-yellow: var(--volt-yellow);
   --accent-yellow-light: #fff6dd;
-  --accent-green: var(--volt-green);
-  --accent-green-light: #e3f8ee;
-
   --border: hsl(var(--primary-hue), 25%, 82%);
   --border-hover: hsl(var(--primary-hue), 45%, 62%);
-  --border-focus: hsl(var(--primary-hue), 75%, 46%);
+  --border-focus: var(--volt-purple);
 
   /* Comic / 2-color hard offset shadows — solid color, no blur, no transparency */
   --shadow-sm: 4px 4px 0 var(--volt-purple);
@@ -149,7 +148,7 @@ img {
 
 /* Full-bleed Volt-purple "punch" section with white text */
 .section-punch {
-  background: linear-gradient(135deg, var(--volt-purple) 0%, #3a1860 100%);
+  background: linear-gradient(135deg, var(--volt-purple) 0%, var(--volt-purple-dark) 100%);
   color: #ffffff;
   position: relative;
   overflow: hidden;
@@ -296,7 +295,7 @@ select:focus-visible {
 
 .badge-primary {
   background-color: var(--volt-blue);
-  color: var(--accent-light);
+  color: var(--volt-purple);
 }
 
 .badge-accent {
@@ -305,8 +304,8 @@ select:focus-visible {
 }
 
 .badge-success {
-  background-color: var(--accent-green-light);
-  color: #0f7a45;
+  background-color: var(--accent-blue-light);
+  color: var(--volt-purple);
 }
 
 .badge-warning {
