@@ -8,7 +8,7 @@ committees: [
     "Ausschuss für Klima, Umwelt und Zukunft",
     "Rechnungsprüfungsausschuss (Stv.)", 
     "Ausschuss für Stadtentwicklung, Wirtschaftsförderung und Tourismus (Stv.)"]
-weight: 1
+weight: 2
 image: "alexander-dernbach.png"
 ---
 
