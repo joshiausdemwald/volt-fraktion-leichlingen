@@ -7,7 +7,6 @@ export default defineConfig({
   // FÜR CUSTOM DOMAIN:
   // site: 'https://volt-fraktion-leichlingen.de',
   site: 'https://zukunft-leichlingen.de',
-  base: '/volt-fraktion-leichlingen/',
 
   // FÜR STANDARD GITHUB PAGES SUBPATH (z.B. https://username.github.io/repo/):
   // site: 'https://<username>.github.io',
