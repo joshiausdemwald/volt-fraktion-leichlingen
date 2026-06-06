@@ -115,8 +115,8 @@ p { margin-bottom: 1.25rem; color: var(--text-secondary); }
   padding-left: 1.5rem;
   color: var(--text-secondary);
   font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.65;
   list-style-position: outside;
 }
 
