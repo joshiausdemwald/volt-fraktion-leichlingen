@@ -3,9 +3,9 @@
 title: Neue Fraktionswebsite online
 date: 2026-06-09
 summary: Die Volt-Fraktion Leichlingen präsentiert ihre neue Website. Hier finden Bürgerinnen und Bürger künftig aktuelle Informationen, Anträge, Termine und Kontaktmöglichkeiten auf einen Blick.
-image: ../../assets/news/volt-team.png
+image: "./volt-team.png"
 tags: ["Volt", "Leichlingen", "Fraktion"]
-featured: true
+featured: false
 
 ---
 

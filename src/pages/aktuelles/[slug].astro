@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -55,7 +56,7 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('de-DE', {
       <!-- Featured Image -->
       {entry.data.image && (
         <div class="post-image-container">
-          <img src={entry.data.image} alt="" class="post-image" />
+          <Image src={entry.data.image} alt={entry.data.title} class="post-image" width={1200} height={675} />
         </div>
       )}
 
