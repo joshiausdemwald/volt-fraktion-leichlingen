@@ -1,6 +1,6 @@
 ---
 interface Props {
-  status: 'eingereicht' | 'beschlossen' | 'abgelehnt' | 'in_beratung';
+  status: 'eingereicht' | 'beschlossen' | 'abgelehnt' | 'in_beratung' | 'ersetzt';
 }
 
 const { status } = Astro.props;
@@ -21,6 +21,10 @@ const statusConfig = {
   in_beratung: {
     label: 'In Beratung',
     class: 'badge-warning'
+  },
+  ersetzt: {
+    label: 'Ersetzt',
+    class: 'badge-info'
   }
 };
 

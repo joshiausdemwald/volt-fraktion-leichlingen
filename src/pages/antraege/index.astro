@@ -13,6 +13,7 @@ const counts = {
   in_beratung: sortedMotions.filter(m => m.data.status === 'in_beratung').length,
   abgelehnt: sortedMotions.filter(m => m.data.status === 'abgelehnt').length,
   eingereicht: sortedMotions.filter(m => m.data.status === 'eingereicht').length,
+  ersetzt: sortedMotions.filter(m => m.data.status === 'ersetzt').length
 };
 ---
 
@@ -56,6 +57,9 @@ const counts = {
             </button>
             <button class="filter-btn" data-filter="abgelehnt" role="tab" aria-selected="false" aria-controls="motions-list">
               Abgelehnt <span class="filter-count">({counts.abgelehnt})</span>
+            </button>
+            <button class="filter-btn" data-filter="ersetzt" role="tab" aria-selected="false" aria-controls="motions-list">
+              Ersetzt <span class="filter-count">({counts.ersetzt})</span>
             </button>
           </div>
         </div>

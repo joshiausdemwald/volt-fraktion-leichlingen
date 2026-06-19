@@ -40,7 +40,7 @@ const motionsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.date(),
-    status: z.enum(['eingereicht', 'beschlossen', 'abgelehnt', 'in_beratung']),
+    status: z.enum(['eingereicht', 'beschlossen', 'abgelehnt', 'in_beratung', 'ersetzt']),
     motionId: z.string(), // z.B. "AN-042/2026"
     summary: z.string(),
     documentUrl: z.string().optional(),
