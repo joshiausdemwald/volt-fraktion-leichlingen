@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactCard from '../components/ContactCard.astro';
+---
+
+<Layout
+  title="Danke | Volt Fraktion Leichlingen"
+  description="Vielen Dank fuer Ihre Nachricht an die Volt Fraktion Leichlingen. Wir melden uns so bald wie moeglich bei Ihnen."
+>
+  <div class="container section thank-you-page">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <span><a href="/">Startseite</a></span>
+      <span><a href="/kontakt">Kontakt</a></span>
+      <strong>Danke</strong>
+    </nav>
+
+    <div class="thank-you-layout">
+      <section class="thank-you-panel" aria-labelledby="thank-you-heading">
+        <span class="badge badge-primary">Nachricht gesendet</span>
+        <h1 id="thank-you-heading">Vielen Dank fuer Ihre Nachricht.</h1>
+        <p class="lead">
+          Ihre Anfrage ist bei uns eingegangen. Wir lesen Ihre Nachricht sorgfaeltig und melden uns so bald wie moeglich bei Ihnen zurueck.
+        </p>
+
+        <div class="next-steps" aria-label="Naechste Schritte">
+          <div>
+            <strong>Wie es weitergeht</strong>
+            <p>Bei Rueckfragen antworten wir direkt an die von Ihnen angegebene E-Mail-Adresse.</p>
+          </div>
+          <div>
+            <strong>Direkter Kontakt</strong>
+            <p>Sie erreichen Sie uns auch per E-Mail unter <a href="mailto:leichlingen@voltdeutschland.org">leichlingen@voltdeutschland.org</a> und telefonisch unter <a href="tel:+4915902055715">+49 (0) 159 0205 5715</a>.</p>
+          </div>
+        </div>
+
+        <div class="thank-you-actions">
+          <a href="/" class="btn btn-primary">Zur Startseite</a>
+          <a href="/kontakt" class="btn btn-secondary">Weitere Nachricht senden</a>
+        </div>
+      </section>
+
+      <aside class="contact-sidebar">
+        <ContactCard showHours={true} />
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .thank-you-page {
+    min-height: 60vh;
+  }
+
+  .thank-you-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .thank-you-panel {
+    background-color: var(--bg-card);
+    padding: 3.5rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .thank-you-panel h1 {
+    margin-top: 0.75rem;
+    margin-bottom: 1.25rem;
+    font-size: 3rem;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    max-width: 680px;
+  }
+
+  .next-steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .next-steps > div {
+    border-left: 4px solid var(--volt-blue);
+    padding-left: 1.25rem;
+  }
+
+  .next-steps strong {
+    display: block;
+    color: var(--volt-purple);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .next-steps p {
+    margin-bottom: 0;
+  }
+
+  .thank-you-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  @media (max-width: 992px) {
+    .thank-you-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .thank-you-panel {
+      padding: 2.25rem 1.5rem;
+    }
+
+    .thank-you-panel h1 {
+      font-size: 2.25rem;
+    }
+
+    .next-steps {
+      grid-template-columns: 1fr;
+    }
+
+    .thank-you-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>
