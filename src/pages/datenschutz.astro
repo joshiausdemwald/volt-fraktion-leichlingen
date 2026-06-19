@@ -123,7 +123,7 @@ import Layout from "../layouts/Layout.astro";
       </section>
 
       <section class="privacy-contact">
-        <h2>Kontaktaufnahme</h2>
+        <h2>Kontaktaufnahme per E-Mail</h2>
 
         <p>
           Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen
@@ -150,6 +150,44 @@ import Layout from "../layouts/Layout.astro";
         </p>
       </section>
 
+      <section class="privacy-contact-form">
+        <h2>Kontaktformular (form.taxi)</h2>
+
+        <p>
+          Wir bieten Ihnen auf unserer Website die Möglichkeit, über ein Kontaktformular direkt mit uns in Verbindung zu treten. Wenn Sie dieses Formular nutzen, werden die von Ihnen in die Eingabemaske eingegebenen Daten an uns übermittelt und verarbeitet. Dies umfasst zwingend bzw. freiwillig folgende Angaben:
+        </p>
+
+        <ul>
+          <li>Ihr Name</li>
+          <li>Ihre E-Mail-Adresse</li>
+          <li>Ihr Anschreiben (Inhalt der Nachricht)</li>
+        </ul>
+
+        <p>
+          Für die Bereitstellung des Formulars, die sichere Übermittlung sowie den technischen Empfang nutzen wir den Dienst <strong>form.taxi</strong>. Anbieter dieses Dienstes ist die <strong>gandssl interactive GmbH</strong>, Schönbrunner Straße 218-220, A-1050 Wien, Österreich (nachfolgend „form.taxi“).
+        </p>
+
+        <p>
+          Die von Ihnen eingegebenen Daten werden auf den Servern von form.taxi verarbeitet und automatisch per E-Mail an unsere Fraktions-E-Mail-Adresse <code>leichlingen@voltdeutschland.org</code> weitergeleitet. Laut Angaben des Anbieters erfolgt die Speicherung und Verarbeitung der Formulardaten ausschließlich auf Servern innerhalb der Europäischen Union (Deutschland).
+        </p>
+
+        <p>
+          <strong>Rechtsgrundlage:</strong> Die Verarbeitung der im Formular eingegebenen Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage der Durchführung vorvertraglicher Maßnahmen dient oder einen bestehenden Vertrag betrifft. Andernfalls erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der Bereitstellung einer benutzerfreundlichen, technisch sicheren und effizienten Möglichkeit zur Kontaktaufnahme.
+        </p>
+
+        <p>
+          <strong>Speicherdauer:</strong> Die Daten werden von uns gelöscht, sobald sie für die Erreichung des Zweckes ihrer Erhebung nicht mehr erforderlich sind (z. B. nach abschließender Beantwortung Ihres Anliegens) und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. form.taxi speichert die Daten ebenfalls nur so lange, wie es für die Erbringung des Weiterleitungsdienstes erforderlich ist bzw. wie es die vertraglichen Vereinbarungen vorsehen.
+        </p>
+
+        <p>
+          <strong>Auftragsverarbeitung:</strong> Wir haben mit der gandssl interactive GmbH einen Vertrag über die Auftragsverarbeitung (AVV) gemäß Art. 28 DSGVO abgeschlossen. Hierdurch wird sichergestellt, dass der Dienstleister die Daten streng nach unseren Weisungen und in Übereinstimmung mit den Vorgaben der DSGVO verarbeitet.
+        </p>
+
+        <p>
+          Weitere Informationen zum Datenschutz bei form.taxi finden Sie in der Datenschutzerklärung des Anbieters unter: <a href="https://form.taxi/de/privacy" target="_blank" rel="noopener noreferrer">https://form.taxi/de/privacy</a>.
+        </p>
+      </section>
+
       <section class="privacy-data-recipients">
         <h2>Empfänger von Daten</h2>
 
@@ -162,7 +200,7 @@ import Layout from "../layouts/Layout.astro";
 
         <p>
           Empfänger können insbesondere die von uns eingesetzten Dienstleister
-          für Hosting und Domainverwaltung sein.
+          für Hosting, Domainverwaltung sowie der Anbieter unseres Kontaktformulars (form.taxi) sein.
         </p>
       </section>
 
@@ -262,11 +300,11 @@ import Layout from "../layouts/Layout.astro";
       padding-bottom: 0.75rem;
     }
 
-    .privacy-section {
+    .privacy-section, .privacy-contact-form {
       margin-bottom: 2.5rem;
     }
 
-    .privacy-section h2 {
+    .privacy-section h2, .privacy-contact-form h2 {
       font-size: 1.5rem;
       margin-top: 2rem;
       margin-bottom: 1.25rem;
@@ -274,27 +312,27 @@ import Layout from "../layouts/Layout.astro";
       padding-bottom: 0.5rem;
     }
 
-    .privacy-section h3 {
+    .privacy-section h3, .privacy-contact-form h3 {
       font-size: 1.15rem;
       margin-top: 1.5rem;
       margin-bottom: 0.75rem;
       color: var(--text-primary);
     }
 
-    .privacy-section p {
+    .privacy-section p, .privacy-contact-form p {
       font-size: 1.05rem;
       line-height: 1.7;
       color: var(--text-secondary);
       margin-bottom: 1rem;
     }
 
-    .privacy-section ul {
+    .privacy-section ul, .privacy-contact-form ul {
       margin-bottom: 1.5rem;
       padding-left: 1.5rem;
       color: var(--text-secondary);
     }
 
-    .privacy-section li {
+    .privacy-section li, .privacy-contact-form li {
       margin-bottom: 0.5rem;
     }
 
