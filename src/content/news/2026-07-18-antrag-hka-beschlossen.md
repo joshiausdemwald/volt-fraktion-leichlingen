@@ -1,6 +1,6 @@
 ---
 
-title: Anfrag auf Sondersitzungen zur Haushaltskonsolidierung beschlossen
+title: Antrag auf Sondersitzungen zur Haushaltskonsolidierung beschlossen
 date: 2026-07-18
 summary: Antrag zur Einrichtung von Sondersitzungen zur Erarbeitung von Vorschlägen zur Haushaltskonsolidierung einstimmig angenommen
 image: "../../assets/news/sparen.png"
@@ -17,7 +17,7 @@ In der Ratssitzung am 9. Juli 2026 haben die Fraktionen Volt, BWL, SPD, CDU sowi
 
 **Der Rat möge die Einrichtung von Sondersitzungen des Haupt- und Finanzausschusses zur Erarbeitung von Vorschlägen zur Haushaltskonsolidierung beschließen.**
 
-In diesen Sondersitzungen sollen alle Ratsfraktionen, einzelne Ratsmitglieder und die Stadtverwaltung gemeinsam überlegen, wie der städtische Haushalt verbessert und Kosten eingespart werden können, ohne die Lebensqualität in Leichlingen unnötig zu verschlechtern. Die Sitzungen werden vom Bürgermeister geleitet.
+In diesen Sondersitzungen sollen alle Ratsfraktionen, einzelne Ratsmitglieder und die Stadtverwaltung gemeinsam überlegen, wie der städtische Haushalt verbessert und Kosten eingespart werden können. Die Sitzungen werden vom Bürgermeister geleitet.
 
 **Der Vorschlag wurde einstimmig beschlossen.**
 
@@ -27,7 +27,7 @@ Die Sondersitzungen sind öffentlich, sodass interessierte Bürgerinnen und Bür
 
 Die **finanzielle Lage** vieler Städte und Gemeinden hat sich in den vergangenen Jahren deutlich verschlechtert. Auch Leichlingen steht vor der Herausforderung, steigende Ausgaben mit begrenzten Einnahmen in Einklang zu bringen. Höhere Kosten für Personal, Energie, Bauprojekte und gesetzliche Pflichtaufgaben belasten den städtischen Haushalt zunehmend.
 
-Vor diesem Hintergrund hat der Rat beschlossen, **zusätzliche öffentliche Sitzungen des Haupt- und Finanzausschusses** durchzuführen. Dort sollen Politik und Verwaltung gemeinsam nach Möglichkeiten suchen, den Haushalt langfristig zu konsolidieren und die **vorhandenen Mittel möglichst sinnvoll** einzusetzen.
+Vor diesem Hintergrund hat der Rat beschlossen, **zusätzliche öffentliche Sitzungen des Haupt- und Finanzausschusses** durchzuführen. Dort sollen Politik und Verwaltung gemeinsam nach Möglichkeiten suchen, den Haushalt langfristig zu konsolidieren und die **vorhandenen Mittel möglichst sinnvoll** einzusetzen. Dies erfordert eine offene Diskussion, damit die gewählten Vertreger aller Bürgerinnen und Bürger gemeinsam die besten Lösungsvorschläge finden.
 
 Dabei geht es nicht darum, pauschal zu kürzen. Vielmehr sollen **Einsparpotenziale sorgfältig geprüft und Prioritäten gesetzt werden**. Freiwillige Leistungen, die das Leben in Leichlingen bereichern – etwa die Stadtbücherei oder die Musikschule – sollen erhalten bleiben! Gleichzeitig dürfen notwendige Investitionen in Straßen, Gebäude und die städtische Infrastruktur nicht vernachlässigt werden, da sonst in Zukunft noch höhere Kosten entstehen könnten.
 
