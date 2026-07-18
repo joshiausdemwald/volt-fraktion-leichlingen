@@ -1,7 +1,7 @@
 ---
 title: Einrichtung von Sondersitzungen des Haupt- und Finanzausschusses zur Haushaltskonsolidierung
 date: 2026-06-19
-status: eingereicht
+status: beschlossen
 motionId: Antrag 021 02/2026
 summary: Gemeinsam mit mehreren Fraktionen beantragen wir überparteiliche Sondersitzungen des Haupt- und Finanzausschusses, um strukturierte und konsensfähige Vorschläge zur nachhaltigen Haushaltsstabilisierung zu erarbeiten.
 documentUrl: "/motions/011-2026-konsolidierung.pdf"
