@@ -1,5 +1,5 @@
 ---
-title: Gemeinsamer Antrag Quartiersparkhaus am Schulzentrum
+title: Gemeinsamer Antragsentwurf Quartiersparkhaus am Schulzentrum
 date: 2026-07-20
 status: eingereicht
 motionId: Antrag 2026
