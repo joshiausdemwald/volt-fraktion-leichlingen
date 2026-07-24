@@ -3,7 +3,7 @@
 title: Zukunftsfähiges Schulzentrum
 icon: schule
 summary: Wir wollen ein modernes, gesundes und nachhaltiges Schulzentrum für Leichlingen. Die Bedürfnisse von Schülerinnen, Schülern und Lehrkräften müssen dabei im Mittelpunkt stehen.
-weight: 20
+weight: 30
 
 ---
 

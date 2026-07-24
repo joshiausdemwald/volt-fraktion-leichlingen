@@ -2,7 +2,7 @@
 title: Solide Finanzen für ein lebenswertes Leichlingen
 icon: finanzen
 summary: Wir setzen uns für einen verantwortungsvollen Umgang mit dem städtischen Haushalt ein. Ziel ist es, notwendige Einsparungen mit dem Erhalt wichtiger Angebote und Investitionen in Einklang zu bringen.
-weight: 10
+weight: 20
 ---
 
 Leichlingen steht vor großen finanziellen Herausforderungen. Steigende Kosten für Pflichtaufgaben, Personal, Energie und Bauprojekte belasten den städtischen Haushalt zunehmend. Gleichzeitig stehen wichtige Zukunftsinvestitionen – wie der Neubau des Schulzentrums – bevor.
