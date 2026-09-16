@@ -5,7 +5,7 @@ date: 2026-06-13
 summary: Von Schulhofgestaltung und Spielplatzumbau über Bildung, Klimaanpassung und Mobilität bis hin zu sozialen Themen – die nächste Sitzungsperiode in Leichlingen bringt viele wichtige Entscheidungen und Diskussionen mit sich.
 image: ../../assets/news/rat.jpg
 tags: ["Volt", "Leichlingen", "Ausschüsse", "Kommunalpolitik"]
-featured: true
+featured: false
 
 ---
 

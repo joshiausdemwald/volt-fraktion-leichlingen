@@ -5,7 +5,7 @@ date: 2026-07-20
 summary: Die Volt-Fraktion Leichlingen feiert Eröffnung!
 image: "../../assets/news/briefkasten.png"
 tags: ["Volt", "Leichlingen", "Fraktion", "Bürger:Innensprechstunde", "Fraktionsbüro", "Bahnhofstraße 33"]
-featured: true
+featured: false
 
 ---
 

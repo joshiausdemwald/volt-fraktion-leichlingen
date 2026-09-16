@@ -5,7 +5,7 @@ date: 2026-06-17
 summary: Volt Leichlingen lädt zur mobilen Bürger:innensprechstunde auf dem Marktplatz ein. Kommt vorbei, lernt unsere Ratsmitglieder kennen und bringt eure Ideen, Anliegen und Fragen mit.
 image: ../../assets/news/mobile-sprechstunde.jpg
 tags: ["Volt", "Leichlingen", "Bürgerbeteiligung", "Transparenz"]
-featured: true
+featured: false
 
 ---
 
