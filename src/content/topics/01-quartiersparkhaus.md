@@ -3,7 +3,7 @@
 title: Quartierparkhäuser
 icon: schule
 summary: Volt unterstützt den gemeinsamen Antrag für ein modulares Quartiersparkhaus am neuen Schulzentrum ausdrücklich, erster Standortvorschlag wird abgelehnt
-weight: 10
+weight: 20
 
 ---
 
