@@ -95,9 +95,8 @@ const heroStyle = backgroundImageUrl
   .hero-section.has-background-image {
     min-height: 620px;
     display: flex;
-    align-items: center;
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.84) 44%, rgba(255, 255, 255, 0.18) 100%),
-                      var(--hero-background-image);
+    align-items: flex-end;
+    background-image: var(--hero-background-image);
     background-size: cover;
     background-position: var(--hero-background-position);
   }
@@ -105,8 +104,15 @@ const heroStyle = backgroundImageUrl
   .hero-container {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    align-items: center;
+    align-items: end;
     gap: 4rem;
+  }
+
+  .has-background-image .hero-content {
+    max-width: 680px;
+    padding: 2rem;
+    background-color: rgb(25 7 48 / 86%);
+    box-shadow: var(--shadow-lg);
   }
 
   @media (max-width: 992px) {
@@ -139,6 +145,12 @@ const heroStyle = backgroundImageUrl
     background-clip: text;
   }
 
+  .has-background-image .hero-title {
+    color: #ffffff;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+
   @media (max-width: 640px) {
     .hero-title {
       font-size: 2.75rem;
@@ -151,6 +163,10 @@ const heroStyle = backgroundImageUrl
     color: var(--text-secondary);
     margin-bottom: 2.5rem;
     max-width: 600px;
+  }
+
+  .has-background-image .hero-lead {
+    color: #ffffff;
   }
 
   @media (max-width: 992px) {
